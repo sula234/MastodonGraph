@@ -35,6 +35,9 @@ After completing the step 2, you should get three types of files: a matrix repre
 Since I was not the instance admin, I could not get a list of all server members at once. Therefore, I used a depth-first graph traversal algorithm to collect all users, which is very slow for servers with a large number of people. However, if you are an admin or have found a way to quickly get the names of all users, then this will reduce the time and allow you to get large graph sizes.
 
 # Jupiter Notebook
+<a target="_blank" href="https://colab.research.google.com/github/sula234/MastodonGraph/blob/main/mastodonGraphs.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
 
 I also added a Jupyter Notebook where you need to open it in Google Colab to work with it. **All comments in notebook are in Russian.**
 
