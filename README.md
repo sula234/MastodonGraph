@@ -1,19 +1,29 @@
 # Mastodon Social Graphs
-## Создание социального графа для серверов mastodon
+## Creating a social graph for mastodon instances
+This repository contains code that allows you to create social graphs for mastodon instances such as this one:
+![Uploading Снимок экрана 2023-04-23 в 23.46.36.png…]()
 
-В данной работе были собраны данные о пользователях двух серверов социальной сети Mastodon и построены наглядные графы которые описывают связи между пользователями исследованных узлов. Основная цель была научиться собирать данные, обрабатывать и отсеивать лишнюю информацию, а также правильно и эстетично визуализировать данные. 
-Для того чтобы приступить к выполнению задачи следует выбрать некоторый сервер Mastodon.  Для простоты был выбран сервер под названием mastodon.in.ua так как он имел небольшое количество пользователей. Далее, чтобы собрать данные для одного пользователя, была использована библиотека Mastodon.py в которой есть специальные функции, возвращающие полную информацию для публичных аккаунтов (включая списки подписчиков и подписок). Однако, как получить лист никнеймов всех пользователей, если Mastodon.py не имел такого метода?  Поэтому, чтобы решить данную проблему, был допущен тот факт, что каждый пользователь связан хотя бы с одним другим пользователем так, чтобы образовывался уже существующий граф связей, включающий в себя каждого человека на сервере. Оставалось только использовать алгоритм обхода графа в глубину и собрать нужные данные. 
-Собрав данные осталось только визуализировать их и также отметить некоторые особенности полученных графов. Ниже будут продемонстрированы разные виды визуализации и использованные библиотеки.
-# Матричная визуализация (numpy, matplotlib)
-Очень простое для реализации и понимания изображение в котором пересечение обозначает связь, а степень связи цвет. Зеленый обозначает,  что один из людей подписан на другого, желтый значит взаимная подписка. Проблема такого отображения в том,  что на глаз сложно определить какие-то паттерны и например сказать какая группа более связана друг с другом. Более того данный поход не самый эффектный и очевидный для восприятия.
-![image1](https://user-images.githubusercontent.com/91324982/230053946-5b0d5d4b-86b9-41da-8473-3c49c0bcbdc7.png)
-# Граф (pandas, networkX)
-Используя библиотеку NetworkX можно получить граф изображенный ниже. Выглядит намного презентабельнее и также мы уже видим две группы людей которые связаны между собой сильнее чем с другой группой. Также мы можем добавить имена вершин и вес связей, однако я не стал отображать все данные сейчас чтобы сразу добавить все в следующую библиотеку для изображения графов. 
+# Step 0: Setting Up
+First you need to clone this repository on your computer.
 
-![image3](https://user-images.githubusercontent.com/91324982/230054754-3e2f2446-d14b-405a-9e40-4a862c45d5d8.png)
-# Анимированный граф (pyvis)
-Единственная разница с предыдущим методом это качество, возможность перетаскивать вершины, добавлены имена и веса связей (синий одна подписка, красный взаимная). 
-![image2](https://user-images.githubusercontent.com/91324982/230055036-5329d086-2442-461e-a6be-6d83da92ac43.png)
-# Граф для другого сервера
-Далее представлен граф для сервера podaboutli.st. Следует отметить, что человек с никнеймом ralph имеет очень много крепких связей. Это связано с тем, что он является главным админом и поэтому возможно самым активным пользователем. Также можно заметить, что все люди на данном сервере более тесно связаны друг с другом чем на предыдущем. 
-![image4](https://user-images.githubusercontent.com/91324982/230055350-da3dbc93-4efd-43f4-af35-47861342504b.png)
+Also to download all the necessary libraries for your Python environment, run:
+pip install -r requirements.txt
+(You may want to create a separate virtual environment for that).
+
+# Step 1: Create an application
+Also, in order to use the API for Mastodon servers, you first need to register and then create an application for working with the API.
+Once you have registered on one of the servers. Find the app.py file in the scripts folder and fill in the relevant data such as the name of your application (can be anything), a link to the server and the file where your key will be saved. Then run: 
+python scripts/app.py
+(Application should be created once).
+
+# Step 2: Creating a graph
+
+Now you need to go to the scripts/main.py file and change the data that I indicated at the very beginning to those that advise you (mail, password, etc.).
+Finally to generate the graph, call:
+python scripts/main.py
+
+# Step 3: Enjoy!
+After completing the step 2, you should get three types of files: a matrix representation of the graph (plot.png), a table with connections, and finally an html file that will contain a beautiful representation of your graph.
+
+# Limitations
+Since I was not the instance admin, I could not get a list of all server members at once. Therefore, I used a depth-first graph traversal algorithm to collect all users, which is very slow for servers with a large number of people. However, if you are an admin or have found a way to quickly get the names of all users, then this will reduce the time and allow you to get large graph sizes.
