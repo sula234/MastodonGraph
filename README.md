@@ -7,20 +7,26 @@ This repository contains code that allows you to create social graphs for mastod
 First you need to clone this repository on your computer.
 
 Also to download all the necessary libraries for your Python environment, run:
-```pip install -r requirements.txt```
+```
+pip install -r requirements.txt
+```
 > You may want to create a separate virtual environment for that.
 
 # Step 1: Create an application
 Also, in order to use the API for Mastodon servers, you first need to register and then create an application for working with the API.
 Once you have registered on one of the servers. Find the app.py file in the scripts folder and fill in the relevant data such as the name of your application (can be anything), a link to the server and the file where your key will be saved. Then run: 
-```python scripts/app.py```
+```
+python scripts/app.py
+```
 > Application should be created once.
 
 # Step 2: Creating a graph
 
 Now you need to go to the scripts/main.py file and change the data that I indicated at the very beginning to those that advise you (mail, password, etc.).
 Finally to generate the graph, call:
-```python scripts/main.py```
+```
+python scripts/main.py
+```
 
 # Step 3: Enjoy!
 After completing the step 2, you should get three types of files: a matrix representation of the graph (plot.png), a table with connections, and finally an html file that will contain a beautiful representation of your graph.
